@@ -1,0 +1,24 @@
+{% extends 'admin_base.html.twig' %}
+{% block body %}
+ <h2 class="page-header">Category List</h2>          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for category in categories%}
+      <tr>
+        <td>{{category.id}}</td>
+        <td>{{category.name}}</td>
+        <td>
+        <a href="/admin/edit-category/{{category.id}}" class="btn btn-default">Edit</a>
+        <a href="/admin/delete-category/{{category.id}}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Blog</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.standalone.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.standalone.min.css.map">
+
+  {% block stylesheets %}
+  {% stylesheets 'bundles/css/*' filter='cssrewrite' %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+  {% endblock %}
+
+
+
+</head>
+
+<body>
+  <div class="container-fluid main-container">
+      <div class="col-md-2 sidebar">
+        <div class="row">
+  <!-- uncomment code for absolute positioning tweek see top comment in css -->
+  <div class="absolute-wrapper"> </div>
+  <!-- Menu -->
+  <div class="side-menu">
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Main Menu -->
+      <div class="side-menu-container">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{{ path('blog') }}"><span class="glyphicon glyphicon-dashboard"></span> Blog Page</a></li>
+          <li><a href="{{ path('createPost') }}"><span class="glyphicon glyphicon-plane"></span> Create Post</a></li>
+          <li><a href="{{ path('createCategory') }}"><span class="glyphicon glyphicon-plane"></span> Create Category</a></li>
+          <li><a href="{{ path('manage') }}"><span class="glyphicon glyphicon-cloud"></span> Manage Posts </a></li>
+          <li><a href="{{ path('manageCategory') }}"><span class="glyphicon glyphicon-cloud"></span> Manage Categories </a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+
+  </div>
+</div>      </div>
+      <div class="col-md-10 content">
+        {% for flash_message in app.session.flashbag.get('notice') %}
+               <div class="alert alert-success"> {{flash_message}}</div>
+        {% endfor %}
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+      </div>
+      <footer class="pull-left footer">
+        <p class="col-md-12">
+          <hr class="divider">
+          Copyright &COPY; 2015 <a href="filipwu.pl">Filip Wroński</a>
+        </p>
+      </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+  </html>

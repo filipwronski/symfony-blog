@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="card card-container">
+         <div class="row">
+        <div class="col-md-12">
+            <h4 class="registration-title">Registration</h4>
+        </div>
+    </div>
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    </div>
+{% endblock body %}

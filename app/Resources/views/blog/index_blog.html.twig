@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="page-header">Posts on blog</h1>          
+    {% for post in posts%}
+        {% if post.published %}
+            <div class="panel panel-default">
+                <div class="panel-heading">{{post.title}}  <span class="label label-info right">{{post.createDate|date('F j, Y')}}</span></div>
+                <div class="panel-body">{{post.content}}</div>
+            </div>
+        {% endif %}
+    {% endfor%}
+{% endblock %}
