@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
  */
-class Post
-{
+class Post {
+
     /**
      * @var int
      *
@@ -35,11 +36,15 @@ class Post
      */
     private $content;
 
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=100, unique=true)
+     * @Gedmo\Mapping\Annotation\Slug(handlers = {
+     * @Gedmo\Mapping\Annotation\SlugHandler(class = "Gedmo\Sluggable\Handler\RelativeSlugHandler", options = {
+     * @Gedmo\Mapping\Annotation\SlugHandlerOption(name = "relationField", value = "category"),
+     * @Gedmo\Mapping\Annotation\SlugHandlerOption(name = "relationSlugField", value = "slug"),
+     * @Gedmo\Mapping\Annotation\SlugHandlerOption(name = "separator", value = "/")
+     * })
+     * }, fields = {"title", "code"})
+     * @Doctrine\ORM\Mapping\Column(length = 64, unique = true)
      */
     private $slug;
 
@@ -63,22 +68,17 @@ class Post
      * @ORM\Column(name="published", type="boolean")
      */
     private $published;
-    
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-
-
     protected $user;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-
-
     protected $category;
 
     /**
@@ -86,8 +86,7 @@ class Post
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -98,8 +97,7 @@ class Post
      *
      * @return Post
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -110,8 +108,7 @@ class Post
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -122,8 +119,7 @@ class Post
      *
      * @return Post
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
 
         return $this;
@@ -134,35 +130,11 @@ class Post
      *
      * @return string
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 
 
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Post
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
 
     /**
      * Set createDate
@@ -171,8 +143,7 @@ class Post
      *
      * @return Post
      */
-    public function setCreateDate($createDate)
-    {
+    public function setCreateDate($createDate) {
         $this->createDate = $createDate;
 
         return $this;
@@ -183,8 +154,7 @@ class Post
      *
      * @return \DateTime
      */
-    public function getCreateDate()
-    {
+    public function getCreateDate() {
         return $this->createDate;
     }
 
@@ -195,8 +165,7 @@ class Post
      *
      * @return Post
      */
-    public function setModificationDate($modificationDate)
-    {
+    public function setModificationDate($modificationDate) {
         $this->modificationDate = $modificationDate;
 
         return $this;
@@ -207,8 +176,7 @@ class Post
      *
      * @return \DateTime
      */
-    public function getModificationDate()
-    {
+    public function getModificationDate() {
         return $this->modificationDate;
     }
 
@@ -219,8 +187,7 @@ class Post
      *
      * @return Post
      */
-    public function setPublished($published)
-    {
+    public function setPublished($published) {
         $this->published = $published;
 
         return $this;
@@ -231,8 +198,7 @@ class Post
      *
      * @return bool
      */
-    public function getPublished()
-    {
+    public function getPublished() {
         return $this->published;
     }
 
@@ -243,8 +209,7 @@ class Post
      *
      * @return Post
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
-    {
+    public function setUser(\AppBundle\Entity\User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -255,8 +220,7 @@ class Post
      *
      * @return \AppBundle\Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -267,8 +231,7 @@ class Post
      *
      * @return Post
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
-    {
+    public function setCategory(\AppBundle\Entity\Category $category = null) {
         $this->category = $category;
 
         return $this;
@@ -279,8 +242,8 @@ class Post
      *
      * @return \AppBundle\Entity\Category
      */
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->category;
     }
+
 }
