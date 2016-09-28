@@ -28,7 +28,7 @@ class DefaultController extends Controller {
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-                $posts, /* query NOT result */ $request->query->getInt('page', 1)/* page number */, 1/* limit per page */
+                $posts, /* query NOT result */ $request->query->getInt('page', 1)/* page number */,4/* limit per page */
         );
 
 
@@ -40,13 +40,16 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/blog/details/{id}", name="post_details")
+     * @Route("/blog/details/{slug}", name="post_details")
      */
-    public function detailsAction($id) {
-        $post = $this->getDoctrine()
-                ->getRepository('AppBundle:Post')
-                ->find($id);
-
+    public function detailsAction($slug) {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+                "SELECT p "
+                . "FROM AppBundle:Post p "
+                . "WHERE p.slug = :slug"
+                )->setParameter('slug', $slug);
+        $post = $query->getSingleResult();
 
         return $this->render('blog/details.html.twig', array(
                     'post' => $post

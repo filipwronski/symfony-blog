@@ -21,9 +21,12 @@ class PostController extends Controller
 
     public function listPosts(Request $request)
      {
-        $posts = $this->getDoctrine()
-        ->getRepository('AppBundle:Post')
-        ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+                "SELECT p.id, p.title, p.content, p.createDate, p.modificationDate, p.published, u.username, c.name "
+                . "FROM AppBundle:Post p JOIN p.user u JOIN p.category c"
+                );
+        $posts = $query->getResult();
 
         return $this->render('admin/post/manage.html.twig', array(
             'posts' => $posts
@@ -46,7 +49,6 @@ class PostController extends Controller
             $title = $form['title']->getData();
             $content = $form['content']->getData();
             $category = $form['category']->getData();
-            $slug = $form['slug']->getData();
             $published = $form['published']->getData();
 
             $now = new\DateTime('now');
@@ -54,7 +56,6 @@ class PostController extends Controller
             $post->setTitle($title);
             $post->setContent($content);
             $post->setCategory($category);
-            $post->setSlug($slug);
             $post->setCreateDate($now);
             $post->setPublished($published);
 

@@ -3,10 +3,12 @@
     <h1 class="page-header">Posts on blog</h1>          
     {% for post in pagination%}
         {% if post.published %}
+            <a href="/blog/details/{{post.slug}}">
             <div class="panel panel-default">
-                <div class="panel-heading">{{post.title}}  <span class="label label-info right">{{post.createDate|date('F j, Y')}}</span></div>
+                <div class="panel-heading">{{post.title}}<span class="label label-info right">{{post.createDate|date('F j, Y')}}</span></div>
                 <div class="panel-body">{{post.content}}</div>
             </div>
+            </a>
         {% endif %}
     {% endfor%}
     <div class="navigation">

@@ -37,14 +37,10 @@ class Post {
     private $content;
 
     /**
-     * @Gedmo\Mapping\Annotation\Slug(handlers = {
-     * @Gedmo\Mapping\Annotation\SlugHandler(class = "Gedmo\Sluggable\Handler\RelativeSlugHandler", options = {
-     * @Gedmo\Mapping\Annotation\SlugHandlerOption(name = "relationField", value = "category"),
-     * @Gedmo\Mapping\Annotation\SlugHandlerOption(name = "relationSlugField", value = "slug"),
-     * @Gedmo\Mapping\Annotation\SlugHandlerOption(name = "separator", value = "/")
-     * })
-     * }, fields = {"title", "code"})
-     * @Doctrine\ORM\Mapping\Column(length = 64, unique = true)
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=100, unique=true)
      */
     private $slug;
 
@@ -70,6 +66,7 @@ class Post {
     private $published;
 
     /**
+     * @Gedmo\Blameable(on="create")
      * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -246,4 +243,28 @@ class Post {
         return $this->category;
     }
 
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Post
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }

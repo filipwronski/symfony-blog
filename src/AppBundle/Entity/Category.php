@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Category
@@ -33,6 +34,12 @@ class Category {
      * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
      */
     protected $posts;
+    
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=100, unique=true)
+     */
+    private $slug;
 
     public function __construct() {
         $this->posts = new ArrayCollection();
@@ -104,4 +111,27 @@ class Category {
         return $this->posts;
     }
 
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }

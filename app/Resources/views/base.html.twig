@@ -42,6 +42,7 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="/blog">Blog</a></li>
+          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Category</a>{{ knp_menu_render('AppBundle:Builder:categoryMenu') }}</li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -55,7 +56,7 @@
           </span>
       </li>
       <li>
-        <a href="admin"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+        <a href="{{ path('admin') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
       </li>
       {% else %}
       <li>

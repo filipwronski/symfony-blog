@@ -22,7 +22,6 @@ class PostType extends AbstractType {
                     'choice_label' => 'name',
                     'attr' => array('class' => 'form-control', 'style' => 'margin-bottom: 15px'),
                 ))
-                ->add('slug', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom: 15px')))
                 ->add('published', ChoiceType::class, array('choices' => array('True' => True, 'False' => False), 'attr' => array('class' => 'form-control', 'style' => 'margin-bottom: 15px')))
                 ->add('save', SubmitType::class, array('label' => 'Create Post', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px')));
     }
