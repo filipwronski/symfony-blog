@@ -23,7 +23,7 @@ class PostController extends Controller
      {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery(
-                "SELECT p.id, p.title, p.content, p.createDate, p.modificationDate, p.published, u.username, c.name "
+                "SELECT p.id, p.title, p.slug, p.content, p.createDate, p.modificationDate, p.published, u.username, c.name "
                 . "FROM AppBundle:Post p JOIN p.user u JOIN p.category c"
                 );
         $posts = $query->getResult();

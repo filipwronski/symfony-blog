@@ -50,6 +50,8 @@ class DefaultController extends Controller {
                 . "WHERE p.slug = :slug"
                 )->setParameter('slug', $slug);
         $post = $query->getSingleResult();
+        
+        
 
         return $this->render('blog/details.html.twig', array(
                     'post' => $post

@@ -5,6 +5,7 @@
         {% if post.published %}
             <a href="/blog/details/{{post.slug}}">
             <div class="panel panel-default">
+                <img src="{{ vich_uploader_asset(post, 'imageFile', 'AppBundle\\Entity\\Post') | imagine_filter('my_thumb3') }}" alt="{{ post.title }}" />
                 <div class="panel-heading">{{post.title}}<span class="label label-info right">{{post.createDate|date('F j, Y')}}</span></div>
                 <div class="panel-body">{{post.content}}</div>
             </div>
